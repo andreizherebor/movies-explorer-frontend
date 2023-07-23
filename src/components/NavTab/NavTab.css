@@ -1,0 +1,51 @@
+.promo__navigation {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+    margin: 0 auto;
+    background: #272727;
+}
+
+.promo__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 41px;
+    justify-content: center;
+}
+
+.promo__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    margin: 0;
+    padding: 24px 0;
+    color: #fff;
+    height: 18px;
+    transition: 0.2s;
+    text-decoration-line: underline;
+}
+
+.promo__link:hover {
+    color: #FFF;
+    opacity: 0.699999988079071;
+}
+
+@media screen and (max-width: 564px) {
+    .promo__navigation {
+        font-size: 11px;
+        line-height: 144%;
+    }
+    .promo__link {
+        padding-top: 28px;
+        height: 16px;
+        max-width: 64px;
+    }
+
+    .promo__list {
+        gap: 25px;
+    }
+}
