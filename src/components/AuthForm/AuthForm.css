@@ -87,7 +87,6 @@
     color: #fff;
     border-radius: 8px;
     background: #2F2F2F;
-    width: 366px;
     height: 16px;
     padding: 15px;
 }
@@ -189,8 +188,5 @@
         font-size: 12px;
         line-height: 15px;
         gap: 7px;
-    }
-    .auth__input {
-        width: 100%;
     }
 }
