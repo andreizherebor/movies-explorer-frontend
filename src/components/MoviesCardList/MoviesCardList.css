@@ -29,7 +29,7 @@
     display: grid;
     box-sizing: border-box;
     width: 100%;
-    grid-template-columns: repeat(3, minmax(min-content, max-content));
+    grid-template-columns: repeat(3, minmax(100px, max-content));
     gap: 35px 30px;
     justify-content: center;
 }
@@ -73,7 +73,7 @@
     }
     
     .cards__list {
-        grid-template-columns: repeat(2, minmax(min-content, max-content));
+        grid-template-columns: repeat(2, minmax(100px, max-content));
         gap: 36px 28px;
     }
 }

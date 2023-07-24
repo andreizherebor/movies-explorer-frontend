@@ -21,7 +21,7 @@ function Header({loggedIn}) {
             <Link to="/" className="header__logo-link">
                 <img className="header__logo" src={logo} alt="Логотип" />
             </Link>
-              {/*  {!loggedIn ? (
+                {/* {!loggedIn ? (
                 <div className="header__buttons">
                     <button
                         onClick={handleRegButton}
@@ -39,8 +39,8 @@ function Header({loggedIn}) {
             ) :  (
                <Menu /> 
             ) 
-            }   */}  
-              <Menu />  
+            }  */}  
+               <Menu />   
         </header>
     );
 }
