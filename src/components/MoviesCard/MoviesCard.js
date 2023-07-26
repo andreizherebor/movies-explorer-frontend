@@ -1,41 +1,57 @@
 import React from 'react';
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
+import { CARDS_IMAGE_BASE_URL } from '../../config/config'
 
-function MoviesCard({ card }) {
-    const currentLocation = useLocation().pathname;
-    const [isSavedMovie, setSavedMovie] = useState(false);
+function MoviesCard({ card, savedCard, onSaveMovie, onDeleteMovie, isSavedFilms, savedMovies }) {
     const cardSaveButtonClassName = (
-        `element__save-button element-button ${isSavedMovie ? "element__save-button_active" : ""}`
+        `element__save-button element-button ${savedCard ? "element__save-button_active" : ""}`
     );
 
-    function handleSaveClick() {
-        setSavedMovie(!isSavedMovie);
+    function handleCardClick() {
+        if (savedCard) {
+            onDeleteMovie(savedMovies.filter((movie) => movie.movieId === card.id)[0]);
+        } else {
+            onSaveMovie(card);
+        }
+    }
+
+    function handleCardDelete() {
+        onDeleteMovie(card);
+    }
+
+    function convertDuration(duration) {
+        const hours = Math.floor(duration / 60);
+        const minutes = duration % 60;
+        return `${hours}ч ${minutes}м`;
     }
 
     return (
         <li className="cards__element">
             <article className="element" id={card._id}>
-            <div className="element__card" >
-            <a className="element__link" href={card.trailerLink} target="_blank" rel="noreferrer">
-                    <img className="element__photo" src={card.image} alt={card.nameRU} />
-                </a>
-                {currentLocation === '/saved-movies' ? (
-                        <button className="element__delete-button element-button" type="button" aria-label="Кнопка для удаления фильма"></button>
-                    ) : (
-                        <button 
-                        className={cardSaveButtonClassName} 
-                        type="button" 
-                        aria-label="Кнопка для сохранения фильма"
-                        onClick={handleSaveClick}
-                        ></button>
-                    )} 
-                </div>
                 <div className="element__info">
+                    <div className="element__description">
                         <h2 className="element__title">{card.nameRU}</h2>
-                        <p className="element__duration">{card.duration}</p>
+                        <p className="element__duration">{convertDuration(card.duration)}</p>
+                    </div>
+                    {isSavedFilms ? (
+                        <button 
+                        onClick={handleCardDelete}
+                        className="element__delete-button element-button" 
+                        type="button" 
+                        aria-label="Кнопка для удаления фильма"
+                        ></button>
+                    ) : (
+                        <button
+                            className={cardSaveButtonClassName}
+                            type="button"
+                            aria-label="Кнопка для сохранения и удаления фильма"
+                            onClick={handleCardClick}
+                        ></button>
+                    )}
                 </div>
+                <a className="element__link" href={card.trailerLink} target="_blank" rel="noreferrer">
+                    <img className="element__photo" src={isSavedFilms ? card.image : `${CARDS_IMAGE_BASE_URL}/${card.image.url}`} alt={card.nameRU} />
+                </a>
             </article>
         </li>
     );

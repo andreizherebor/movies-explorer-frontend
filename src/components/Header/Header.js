@@ -4,9 +4,8 @@ import './Header.css';
 import Menu from '../../components/Menu/Menu'
 import logo from '../../images/logo.svg';
 
-function Header({loggedIn}) {
+function Header({ loggedIn }) {
     const navigate = useNavigate();
-   
 
     function handleRegButton() {
         navigate('/signup', { replace: true });
@@ -21,7 +20,7 @@ function Header({loggedIn}) {
             <Link to="/" className="header__logo-link">
                 <img className="header__logo" src={logo} alt="Логотип" />
             </Link>
-                {/* {!loggedIn ? (
+            {!loggedIn ? (
                 <div className="header__buttons">
                     <button
                         onClick={handleRegButton}
@@ -36,11 +35,10 @@ function Header({loggedIn}) {
                         aria-label="Кнопка авторизации"
                     >Войти</button>
                 </div>
-            ) :  (
-               <Menu /> 
-            ) 
-            }  */}  
-               <Menu />   
+            ) : (
+                <Menu />
+            )
+            }
         </header>
     );
 }
