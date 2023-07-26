@@ -28,12 +28,11 @@ function MoviesCard({ card, savedCard, onSaveMovie, onDeleteMovie, isSavedFilms,
     return (
         <li className="cards__element">
             <article className="element" id={card._id}>
-                <div className="element__info">
-                    <div className="element__description">
-                        <h2 className="element__title">{card.nameRU}</h2>
-                        <p className="element__duration">{convertDuration(card.duration)}</p>
-                    </div>
-                    {isSavedFilms ? (
+                <div className="element__card">
+                <a className="element__link" href={card.trailerLink} target="_blank" rel="noreferrer">
+                    <img className="element__photo" src={isSavedFilms ? card.image : `${CARDS_IMAGE_BASE_URL}/${card.image.url}`} alt={card.nameRU} />
+                </a>
+                {isSavedFilms ? (
                         <button 
                         onClick={handleCardDelete}
                         className="element__delete-button element-button" 
@@ -49,9 +48,10 @@ function MoviesCard({ card, savedCard, onSaveMovie, onDeleteMovie, isSavedFilms,
                         ></button>
                     )}
                 </div>
-                <a className="element__link" href={card.trailerLink} target="_blank" rel="noreferrer">
-                    <img className="element__photo" src={isSavedFilms ? card.image : `${CARDS_IMAGE_BASE_URL}/${card.image.url}`} alt={card.nameRU} />
-                </a>
+                <div className="element__info">
+                        <h2 className="element__title">{card.nameRU}</h2>
+                        <p className="element__duration">{convertDuration(card.duration)}</p>
+                </div>
             </article>
         </li>
     );

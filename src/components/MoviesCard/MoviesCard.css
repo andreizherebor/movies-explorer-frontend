@@ -96,6 +96,7 @@
 .element__card {
     position: relative; 
     width: 100%;
+    height: 201px;
 }
 .element__photo {
     width: 100%;
@@ -107,6 +108,10 @@
    
     .element__info {
         padding: 23px 0 0;
+    }
+
+    .element__card {
+        max-height: 190px;
     }
 }
 
