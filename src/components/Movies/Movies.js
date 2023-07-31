@@ -38,11 +38,11 @@ function Movies({ savedMovies, onSaveMovie, onDeleteMovie }) {
         localStorage.setItem('movieSearch', searchQuery);
         localStorage.setItem('shortMovies', isCheckboxActive);
         if (localStorage.getItem('allMovies')) {
-            console.log('Показываем фильмы из загруженных с сервера');
+            console.log('Карточки загружены');
             const movies = JSON.parse(localStorage.getItem('allMovies'));
             getFilterMovies(movies, searchQuery, isCheckboxActive);
         } else {
-            console.log('Загружаем фильмы с сервера');
+            console.log('Идет загрузка карточек');
             setIsLoading(true);
             moviesApi.getMovies()
                 .then((cardsData) => {
