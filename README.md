@@ -14,4 +14,3 @@ Backend: https://api.movies.azherebor.nomoreparties.sbs
 
 
 
-scp -r ./build/* dema_19@158.160.42.151:/home/dema_19/movies-explorer-frontend/build
