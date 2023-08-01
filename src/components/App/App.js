@@ -36,9 +36,11 @@ function App() {
   const [infoImg, setInfoImg] = useState(SuccessImgSrc);
   const [savedMovies, setSavedMovies] = useState([]);
   const [editSubmitTitle, setEditSubmitTitle] = useState("Сохранить");
+  const [profileIsEditing, setProfileIsEditing] = useState(false);
 
   useEffect(() => {
     checkToken();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -138,11 +140,14 @@ function App() {
     setEditSubmitTitle("Сохраняем...");
     const name = userData.name;
     const email = userData.email;
+    setProfileIsEditing(true);
+
     mainApi.editUserInfo(name, email, currentToken)
       .then((res) => {
         setCurrentUser(res);
         setInfoTitle(USER_INFO_SUCCESS_MESSAGE);
         setInfoImg(SuccessImgSrc);
+        setProfileIsEditing(false);
       })
       .catch((err) => {
         handleUnauthorized(err);
@@ -155,6 +160,10 @@ function App() {
         setIsInfoPopupOpen(true);
         setEditSubmitTitle("Сохранить")
       });
+  }
+
+  function profileEditStateChanged(state) {
+    setProfileIsEditing(state);
   }
 
   function saveMovie(movieCard) {
@@ -223,10 +232,12 @@ function App() {
           <Route path="/profile" element={<ProtectedRoute
             element={ProfilePage}
             onUpdate={handleUpdateUser}
+            onProfileEditStateChanged={profileEditStateChanged}
             editSubmitTitle={editSubmitTitle}
             logOut={handleLogout}
             isLoading={isLoading}
             loggedIn={loggedIn}
+            profileIsEditing={profileIsEditing}
           />} />
           <Route path="/" element={<MainPage loggedIn={loggedIn} />} />
           <Route path="/signin" element={<LoggedIn 

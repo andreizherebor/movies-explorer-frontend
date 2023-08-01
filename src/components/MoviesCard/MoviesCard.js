@@ -4,7 +4,7 @@ import { CARDS_IMAGE_BASE_URL } from '../../config/config'
 
 function MoviesCard({ card, savedCard, onSaveMovie, onDeleteMovie, isSavedFilms, savedMovies }) {
     const cardSaveButtonClassName = (
-        `element__save-button element-button ${savedCard ? "element__save-button_active" : ""}`
+        `element__save-button element-button ${savedCard ? "element__save-button_active " : ""}`
     );
 
     function handleCardClick() {
@@ -12,8 +12,9 @@ function MoviesCard({ card, savedCard, onSaveMovie, onDeleteMovie, isSavedFilms,
             onDeleteMovie(savedMovies.filter((movie) => movie.movieId === card.id)[0]);
         } else {
             onSaveMovie(card);
-        }
-    }
+        } 
+    } 
+   
 
     function handleCardDelete() {
         onDeleteMovie(card);

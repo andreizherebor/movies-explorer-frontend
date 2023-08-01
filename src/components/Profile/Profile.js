@@ -4,8 +4,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import useForm from '../FormValidator/FormValidator';
 import { USER_NAME_REGEX } from '../../config/config';
 
-function Profile({ logOut, onUpdate, editSubmitTitle, isLoading }) {
-    const [isDisabled, setIsDisabled] = useState(true);
+function Profile({ logOut, onUpdate, onProfileEditStateChanged, editSubmitTitle, isLoading, profileIsEditing }) {
     const currentUser = useContext(CurrentUserContext);
 
     const { enteredValues, errors, handleChange, isFormValid, resetForm } = useForm();
@@ -36,8 +35,6 @@ function Profile({ logOut, onUpdate, editSubmitTitle, isLoading }) {
             });
             resetForm();
         }
-
-        setIsDisabled(true);
     }
 
     useEffect(() => {
@@ -50,6 +47,7 @@ function Profile({ logOut, onUpdate, editSubmitTitle, isLoading }) {
             email = enteredValues.email === currentUser.email;
         }
         setEqualValues(name && email);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [enteredValues.name, enteredValues.email]);
 
     useEffect(() => {
@@ -70,17 +68,18 @@ function Profile({ logOut, onUpdate, editSubmitTitle, isLoading }) {
 
 
     const profileLabelClassName = (
-        `profile__text ${isDisabled ? "profile__text_disabled" : ""}`
+        `profile__text ${!profileIsEditing ? "profile__text_disabled" : ""}`
     );
 
     const profileSubmitButtonClassName = (
-        `profile__submit-button submit-button ${isDisabled ? "profile__submit-button_disabled" : ""} ${!isFormValid || isLoading || isEqualValues ? "submit-button_inactive" : ""}`
+        `profile__submit-button submit-button ${!profileIsEditing ? "profile__submit-button_disabled" : ""} ${!isFormValid || isLoading || isEqualValues ? "submit-button_inactive" : ""}`
     );
 
     function handleEditButtonClick() {
         enteredValues.name = currentUser.name;
         enteredValues.email = currentUser.email;
-        setIsDisabled(!isDisabled);
+
+        onProfileEditStateChanged(!profileIsEditing);
     }
 
     return (
@@ -97,7 +96,7 @@ function Profile({ logOut, onUpdate, editSubmitTitle, isLoading }) {
                             id="name"
                             name="name"
                             type="text"
-                            className={`profile__data ${isDisabled || isLoading ? "profile__data_disabled" : ""} ${errors.name ? "profile__data_type_error" : ""}`}
+                            className={`profile__data ${!profileIsEditing || isLoading ? "profile__data_disabled" : ""} ${errors.name ? "profile__data_type_error" : ""}`}
                             value={`${enteredValues.name ? enteredValues.name : name}`}
                             minLength="2"
                             maxLength="30"
@@ -117,7 +116,7 @@ function Profile({ logOut, onUpdate, editSubmitTitle, isLoading }) {
                             name="email"
                             type="email"
                             // placeholder="E-mail"
-                            className={`profile__data ${isDisabled || isLoading ? "profile__data_disabled" : ""} ${errors.email ? "profile__data_type_error" : ""}`}
+                            className={`profile__data ${!profileIsEditing || isLoading ? "profile__data_disabled" : ""} ${errors.email ? "profile__data_type_error" : ""}`}
                             value={`${enteredValues.email ? enteredValues.email : email}`}
                             minLength="2"
                             maxLength="30"
@@ -134,7 +133,7 @@ function Profile({ logOut, onUpdate, editSubmitTitle, isLoading }) {
                     className="profile__button profile__button_type_toggle"
                     type="button"
                     onClick={handleEditButtonClick}
-                >{isDisabled ? "Редактировать" : "Отменить"}</button>
+                >{!profileIsEditing ? "Редактировать" : "Отменить"}</button>
                 <button
                     onClick={logOut}
                     className="profile__button profile__button_type_exit nav-button"
