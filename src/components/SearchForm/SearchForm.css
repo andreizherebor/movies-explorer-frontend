@@ -1,0 +1,118 @@
+.search {
+    margin: 74px 70px 0;
+    box-sizing: border-box;
+    padding: 80px 0 82px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    border-bottom: 1px solid #AAA;
+}
+
+
+.search__form {
+    width: 100%;
+    height: 48px;
+    box-sizing: border-box;
+    border-radius: 50px;
+    border: 1.5px solid rgba(170, 170, 170, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px;
+}
+
+
+.search__input {
+    margin: 0;
+    padding: 0 12px;
+    border: none;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 128% ;
+    background-color: transparent;
+    width: calc(100% - 150px);
+    height: 100%;
+    outline: none;
+    color: #FFF;
+}
+
+.search__input:focus {
+    border-bottom: 1px solid #3456F3;
+}
+
+.search__input::placeholder {
+    color: #A0A0A0;
+}
+
+.search__button {
+    margin: -4px;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    background-image: url(../../images/find-btn.svg);
+    background-repeat: no-repeat;
+    height: 34px;
+    width: 80px;
+    background-color: #202020;
+    text-align: center;
+    cursor: pointer;
+}
+
+.search__button:hover {
+    opacity: 0.8;
+}
+.search__error {
+    position: absolute;
+    top: 105px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    color: #EE3465;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.search__error_active {
+    visibility: visible;
+}
+
+@media screen and (max-width: 896px) {
+    .search {
+        margin: 55px 30px 0;
+        padding: 80px 0 20px ;
+        flex-direction: column
+        
+    }
+}
+
+@media screen and (max-width: 564px) {
+    .search {
+        margin: 133px 11px 43px;
+        padding: 0 ;
+    }
+
+    .search__form {
+        height: 48px;
+        padding: 5px;
+    }
+
+    .search__input {
+        padding: 0 6px;
+        font-size: 16px;
+        line-height: 100%;
+        width: calc(100% - 120px);
+    }
+
+    .search__button {
+        height: 34px;
+        width: 80px;
+        margin: 0;
+    }
+}
